@@ -60,10 +60,5 @@ VITE_API_BASE_URL=http://localhost:4000
 npm run build
 ```
 
-## Deployment Checklist
-- [ ] Deploy the static build to Render, Netlify, or Vercel
-- [ ] Populate Mongo collections with ≥ 1k realistic rows (employees, shifts, time-off)
-- [ ] Record narrated demo video (each teammate speaks)
-
 ## License
 Distributed under the MIT License. See `LICENSE` for details.
