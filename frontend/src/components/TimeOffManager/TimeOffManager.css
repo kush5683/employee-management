@@ -1,0 +1,148 @@
+/* -------------------------------------------------------------------------- */
+/* Time Off Manager                                                           */
+/* -------------------------------------------------------------------------- */
+.timeoff-manager {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.82));
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-medium), var(--shadow-ring);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timeoff-manager__header h2 {
+  margin: 0;
+}
+
+.timeoff-manager__header p {
+  margin: 0.3rem 0 0;
+  color: var(--color-text-secondary);
+}
+
+.timeoff-manager__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.timeoff-manager__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.timeoff-manager__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timeoff-manager__field span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.timeoff-manager__field input,
+.timeoff-manager__field select {
+  border-radius: 12px;
+  border: 1px solid rgba(142, 156, 198, 0.35);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.timeoff-manager__field--full {
+  grid-column: 1 / -1;
+}
+
+.timeoff-manager__form button {
+  align-self: flex-start;
+  border-radius: 999px;
+  border: none;
+  padding: 0.75rem 1.45rem;
+  background: linear-gradient(135deg, var(--color-accent-warm), #fb7185);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 18px 35px rgba(251, 113, 133, 0.3);
+}
+
+.timeoff-manager__form button:disabled {
+  background: rgba(148, 163, 184, 0.55);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.timeoff-manager__error {
+  margin: 0;
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.timeoff-manager__list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.timeoff-manager__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-xs);
+}
+
+.timeoff-manager__item h3 {
+  margin: 0;
+}
+
+.timeoff-manager__item p {
+  margin: 0.25rem 0 0;
+  color: var(--color-text-secondary);
+}
+
+.timeoff-manager__reason {
+  margin-top: 0.45rem;
+  color: var(--color-text-primary);
+}
+
+.timeoff-manager__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.timeoff-manager__actions select {
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(142, 156, 198, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.timeoff-manager__actions button {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.timeoff-manager__empty {
+  margin: 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,4 @@
+/* Tweak the hero headline line-height separate from component styles */
+.dashboard__hero h1 {
+  line-height: 1.08;
+}

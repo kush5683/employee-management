@@ -1,0 +1,63 @@
+/* -------------------------------------------------------------------------- */
+/* Global Theme Tokens                                                        */
+/* -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --color-bg: #eef3ff;
+  --color-bg-alt: #f9fbff;
+  --color-surface: rgba(255, 255, 255, 0.8);
+  --color-surface-strong: rgba(255, 255, 255, 0.95);
+  --color-surface-muted: rgba(255, 255, 255, 0.65);
+  --color-text-primary: #0f1d40;
+  --color-text-secondary: #526084;
+  --color-text-muted: #8591b5;
+  --color-accent: #4c6ef5;
+  --color-accent-strong: #364fc7;
+  --color-accent-warm: #f97316;
+  --shadow-xs: 0 12px 28px -18px rgba(15, 23, 42, 0.35);
+  --shadow-soft: 0 25px 55px -30px rgba(15, 23, 42, 0.45);
+  --shadow-medium: 0 35px 70px -30px rgba(76, 110, 245, 0.28);
+  --shadow-ring: 0 0 0 1px rgba(88, 110, 176, 0.18);
+  --radius-md: 16px;
+  --radius-lg: 26px;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* Apply border-box everywhere so padding never affects width calculations */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Decorative background gradients live on the body so every route inherits them */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(76, 110, 245, 0.22) 0, transparent 55%),
+    radial-gradient(circle at 85% 10%, rgba(244, 114, 182, 0.2) 0, transparent 55%),
+    radial-gradient(circle at 85% 85%, rgba(79, 209, 197, 0.16) 0, transparent 52%),
+    linear-gradient(120deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
