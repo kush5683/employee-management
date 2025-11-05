@@ -65,3 +65,56 @@ export const apiClient = {
     await request(`/shifts/${id}`, { method: 'DELETE' });
   }
 };
+
+// ---------- Employees ----------
+export const EmployeesAPI = {
+  async list() {
+    const payload = await request('/employees');
+    return payload?.data ?? [];              // expect array
+  },
+  async create(body) {
+    const payload = await request('/employees', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+    return payload?.data;                    // created employee
+  },
+  async update(id, updates) {
+    const payload = await request(`/employees/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(updates),
+    });
+    return payload?.data;                    // updated employee
+  },
+  async remove(id) {
+    await request(`/employees/${id}`, { method: 'DELETE' });
+  },
+};
+
+// ---------- Availability ----------
+export const AvailabilityAPI = {
+  // GET /availabilities?employeeId=<id>
+  async listByEmployee(employeeId) {
+    const payload = await request(`/availabilities?employeeId=${encodeURIComponent(employeeId)}`);
+    return payload?.data ?? [];              // [{ dayOfWeek, startTime, endTime, ... }]
+  },
+
+  // POST /availabilities  (upsert a single day window)
+  // body: { employeeId, dayOfWeek, startTime, endTime }
+  async upsertOne(body) {
+    const payload = await request('/availabilities', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+    return payload?.data;                    // saved doc
+  },
+
+  // DELETE /availabilities/one  (body: { employeeId, dayOfWeek })
+  async deleteOne(employeeId, dayOfWeek) {
+    await request('/availabilities/one', {
+      method: 'DELETE',
+      body: JSON.stringify({ employeeId, dayOfWeek }),
+    });
+  },
+};
+
