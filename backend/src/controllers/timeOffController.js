@@ -108,6 +108,9 @@ export const deleteTimeOffRequest = async (req, res, next) => {
 };
 
 function normalise(doc) {
+  if (!doc) {
+    return null;
+  }
   const { _id, ...rest } = doc;
   return { id: _id.toString(), ...rest };
 }
