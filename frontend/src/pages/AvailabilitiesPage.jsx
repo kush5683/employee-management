@@ -1,4 +1,6 @@
 import AvailabilityManager from "../components/AvailabilityManager/AvailabilityManager";
+import TeamAvailabilityMatrix from "../components/AvailabilityManager/TeamAvailabilityMatrix.jsx";
+
 import "./ShiftManagementPage.css"; // reuse layout styles
 
 export default function AvailabilitiesPage() {
@@ -10,6 +12,11 @@ export default function AvailabilitiesPage() {
       </header>
 
       <AvailabilityManager />
+
+      <div style={{ marginTop: 16 }}>
+        <TeamAvailabilityMatrix />
+      </div>
     </div>
   );
 }
+
