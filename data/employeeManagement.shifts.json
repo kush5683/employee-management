@@ -1,0 +1,136 @@
+[{
+  "_id": {
+    "$oid": "690e30be7df4dd8eafb89dd4"
+  },
+  "employeeId": "690e30bd7df4dd8eafb89dd0",
+  "date": "2024-06-10",
+  "startTime": "07:00",
+  "endTime": "13:00",
+  "location": "Cambridge Cafe",
+  "status": "scheduled",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690e30be7df4dd8eafb89dd5"
+  },
+  "employeeId": "690e30bd7df4dd8eafb89dd0",
+  "date": "2024-06-03",
+  "startTime": "12:00",
+  "endTime": "18:00",
+  "location": "Cambridge Cafe",
+  "status": "in-progress",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690e30be7df4dd8eafb89dd6"
+  },
+  "employeeId": "690e30bd7df4dd8eafb89dd1",
+  "date": "2024-05-15",
+  "startTime": "16:00",
+  "endTime": "22:00",
+  "location": "Seaport Kitchen",
+  "status": "completed",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690e30be7df4dd8eafb89dd7"
+  },
+  "employeeId": "690e30bd7df4dd8eafb89dd1",
+  "date": "2024-06-18",
+  "startTime": "15:00",
+  "endTime": "21:00",
+  "location": "Seaport Kitchen",
+  "status": "scheduled",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690e30be7df4dd8eafb89dd8"
+  },
+  "employeeId": "690e30bd7df4dd8eafb89dd2",
+  "date": "2024-05-28",
+  "startTime": "09:00",
+  "endTime": "17:00",
+  "location": "Seaport Kitchen",
+  "status": "cancelled",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690e30be7df4dd8eafb89dd9"
+  },
+  "employeeId": "690e30bd7df4dd8eafb89dd3",
+  "date": "2024-05-30",
+  "startTime": "06:00",
+  "endTime": "12:00",
+  "location": "Cambridge Cafe",
+  "status": "completed",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690e30be7df4dd8eafb89dda"
+  },
+  "employeeId": "690e30bd7df4dd8eafb89dd3",
+  "date": "2024-06-12",
+  "startTime": "10:00",
+  "endTime": "16:00",
+  "location": "Cambridge Cafe",
+  "status": "scheduled",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690e30be7df4dd8eafb89ddb"
+  },
+  "employeeId": "690e30bd7df4dd8eafb89dcf",
+  "date": "2024-06-05",
+  "startTime": "08:00",
+  "endTime": "16:00",
+  "location": "Boston HQ",
+  "status": "scheduled",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.082Z"
+  }
+}]

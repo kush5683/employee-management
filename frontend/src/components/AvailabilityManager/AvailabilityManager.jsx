@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import { AvailabilityAPI, EmployeesAPI } from "../../services/apiClient";
 import "./AvailabilityManager.css";
 
@@ -17,15 +18,25 @@ const DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
  *   POST   /api/availabilities                         (body: { employeeId, dayOfWeek, startTime, endTime })
  *   DELETE /api/availabilities/one                     (body: { employeeId, dayOfWeek })
  */
-export default function AvailabilityManager() {
+export default function AvailabilityManager({
+  onAvailabilityChange,
+  employeeOverride = null,
+  canSelectEmployee = true
+}) {
   const [employees, setEmployees] = useState([]);
   const [empId, setEmpId] = useState("");
-  const [rows, setRows] = useState(DAYS.map((_,i)=>({ dayOfWeek:i, startTime:"", endTime:"" })));
+  const [rows, setRows] = useState(DAYS.map((_, i) => ({ dayOfWeek: i, startTime: "", endTime: "" })));
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  // Fetch employees once
+  // Load people list only for managers; employees use the override data.
   useEffect(() => {
+    if (!canSelectEmployee && employeeOverride) {
+      setEmployees([employeeOverride]);
+      setEmpId(employeeOverride._id);
+      return;
+    }
+
     (async () => {
       try {
         const data = await EmployeesAPI.list();
@@ -35,7 +46,7 @@ export default function AvailabilityManager() {
         setErr("Failed to fetch employees");
       }
     })();
-  }, []);
+  }, [canSelectEmployee, employeeOverride]);
 
   const currentEmp = useMemo(() => employees.find(e => e._id === empId), [employees, empId]);
 
@@ -82,6 +93,9 @@ export default function AvailabilityManager() {
       await Promise.all(ops);
       await loadAvail(empId);
       setErr("");
+      if (typeof onAvailabilityChange === "function") {
+        onAvailabilityChange();
+      }
     } catch {
       setErr("Save failed");
     } finally {
@@ -96,17 +110,21 @@ export default function AvailabilityManager() {
           <h2>Availability</h2>
           <p className="muted">Weekly windows per employee.</p>
         </div>
-        <select
-          className="avail-input avail-select"
-          value={empId}
-          onChange={(e) => setEmpId(e.target.value)}
-        >
-          {employees.map((e) => (
-            <option key={e._id} value={e._id}>
-              {e.name} — {e.role || "Employee"}
-            </option>
-          ))}
-        </select>
+        {canSelectEmployee ? (
+          <select
+            className="avail-input avail-select"
+            value={empId}
+            onChange={(e) => setEmpId(e.target.value)}
+          >
+            {employees.map((e) => (
+              <option key={e._id} value={e._id}>
+                {e.name} — {e.role || "Employee"}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <div className="muted">{employeeOverride?.name}</div>
+        )}
       </div>
 
       {err && <div className="error">{err}</div>}
@@ -160,3 +178,13 @@ export default function AvailabilityManager() {
     </section>
   );
 }
+
+AvailabilityManager.propTypes = {
+  onAvailabilityChange: PropTypes.func,
+  employeeOverride: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    role: PropTypes.string
+  }),
+  canSelectEmployee: PropTypes.bool
+};

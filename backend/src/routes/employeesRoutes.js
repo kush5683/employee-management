@@ -5,10 +5,13 @@ import {
   updateEmployee,
   deleteEmployee,
 } from "../controllers/employeesController.js";
+import { requireAuth } from "../middleware/authMiddleware.js";
+import { requireManager } from "../middleware/permissions.js";
 
 const router = Router();
 
-// base path is /api/employees (mounted in server.js), so use "/"
+router.use(requireAuth, requireManager);
+
 router.get("/", listEmployees);
 router.post("/", createEmployee);
 router.patch("/:id", updateEmployee);

@@ -1,0 +1,113 @@
+[{
+  "_id": {
+    "$oid": "690e30bd7df4dd8eafb89dcf"
+  },
+  "employeeCode": "EMP001",
+  "name": "Jordan Miles",
+  "email": "jordan.miles@example.com",
+  "role": "Manager",
+  "location": "Boston HQ",
+  "hourlyRate": 28,
+  "active": true,
+  "managerCode": null,
+  "createdAt": {
+    "$date": "2025-11-07T17:47:41.823Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:41.883Z"
+  },
+  "managerId": null,
+  "passwordHash": "$2a$10$XToL/WfBvgVcksLf.raUOOAlH8prYLu6bioTOu2rZnd7zRzDzlAGS"
+},
+{
+  "_id": {
+    "$oid": "690e30bd7df4dd8eafb89dd0"
+  },
+  "employeeCode": "EMP002",
+  "name": "Priya Patel",
+  "email": "priya.patel@example.com",
+  "role": "Employee",
+  "location": "Cambridge Cafe",
+  "hourlyRate": 18.5,
+  "active": true,
+  "managerCode": "EMP001",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:41.823Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:41.933Z"
+  },
+  "managerId": {
+    "$oid": "690e30bd7df4dd8eafb89dcf"
+  },
+  "passwordHash": "$2a$10$SIaWiLWPk6Sauk0JH1qOAeN.QbajYF..Ge4ZKeGfZQVn4GTvPEQyy"
+},
+{
+  "_id": {
+    "$oid": "690e30bd7df4dd8eafb89dd1"
+  },
+  "employeeCode": "EMP003",
+  "name": "Andres Castillo",
+  "email": "andres.castillo@example.com",
+  "role": "Employee",
+  "location": "Seaport Kitchen",
+  "hourlyRate": 20,
+  "active": false,
+  "managerCode": "EMP001",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:41.823Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:41.982Z"
+  },
+  "managerId": {
+    "$oid": "690e30bd7df4dd8eafb89dcf"
+  },
+  "passwordHash": "$2a$10$2BIR3XA8.GCNFhei9GNlIOIPSoQlkRNoYaoQBVwilUy/ONKdwsgda"
+},
+{
+  "_id": {
+    "$oid": "690e30bd7df4dd8eafb89dd2"
+  },
+  "employeeCode": "EMP004",
+  "name": "Sasha Green",
+  "email": "sasha.green@example.com",
+  "role": "Employee",
+  "location": "Seaport Kitchen",
+  "hourlyRate": 17,
+  "active": true,
+  "managerCode": "EMP001",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:41.823Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.032Z"
+  },
+  "managerId": {
+    "$oid": "690e30bd7df4dd8eafb89dcf"
+  },
+  "passwordHash": "$2a$10$KJXb14Q67zvIMsHbq.z2qOfGoOtIyMllhc3J6CdI5uw9gmRxamxbC"
+},
+{
+  "_id": {
+    "$oid": "690e30bd7df4dd8eafb89dd3"
+  },
+  "employeeCode": "EMP005",
+  "name": "Marcus Lee",
+  "email": "marcus.lee@example.com",
+  "role": "Employee",
+  "location": "Cambridge Cafe",
+  "hourlyRate": 19,
+  "active": true,
+  "managerCode": "EMP001",
+  "createdAt": {
+    "$date": "2025-11-07T17:47:41.823Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-07T17:47:42.081Z"
+  },
+  "managerId": {
+    "$oid": "690e30bd7df4dd8eafb89dcf"
+  },
+  "passwordHash": "$2a$10$lf.hKf.koKCE3L7c7Kc7AuVvjIofhj3QgeUVUdyL4jwarHGmyZ99S"
+}]

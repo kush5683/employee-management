@@ -14,6 +14,7 @@ import './EmployeesTable.css';
 const DEFAULT_FORM = {
   name: '',
   email: '',
+  password: '',
   role: 'Team Member',
   hourlyRate: 18,
   location: '',
@@ -30,7 +31,10 @@ export function EmployeesTable({ employees, loading, error, onCreate }) {
   const [formError, setFormError] = useState(null);
 
   // Basic validation: disable the submit button until all required fields exist.
-  const canSubmit = useMemo(() => form.name && form.email && form.role, [form]);
+  const canSubmit = useMemo(
+    () => Boolean(form.name && form.email && form.role && form.password?.length >= 8),
+    [form]
+  );
 
   // Keep `handleChange` minimal by computing the new form state from the event.
   const handleChange = (event) => {
@@ -96,6 +100,19 @@ export function EmployeesTable({ employees, loading, error, onCreate }) {
               value={form.email}
               onChange={handleChange}
               placeholder="jane@example.com"
+            />
+          </label>
+
+          <label className="employees__field">
+            <span>Temporary Password</span>
+            <input
+              name="password"
+              type="password"
+              minLength={8}
+              required
+              value={form.password}
+              onChange={handleChange}
+              placeholder="At least 8 characters"
             />
           </label>
 

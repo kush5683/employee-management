@@ -11,13 +11,35 @@ const INITIAL_FORM = {
   reason: ''
 };
 
-export function TimeOffManager({ employees, requests, loading, error, onCreate, onUpdateStatus, onDelete }) {
-  const [form, setForm] = useState(INITIAL_FORM);
+/**
+ * TimeOffManager
+ * - Managers: create requests for anyone, change statuses, delete records.
+ * - Employees: submit requests for themselves (using JWT identity) and view status chips.
+ */
+export function TimeOffManager({
+  employees,
+  requests,
+  loading,
+  error,
+  onCreate,
+  onUpdateStatus,
+  onDelete,
+  mode = 'manager',
+  currentUser
+}) {
+  const isManagerView = mode === 'manager';
+  const [form, setForm] = useState(() => ({
+    ...INITIAL_FORM,
+    employeeId: isManagerView ? '' : currentUser?.id || ''
+  }));
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState(null);
   const [listError, setListError] = useState(null);
 
-  const canSubmit = useMemo(() => form.employeeId && form.startDate && form.endDate, [form]);
+  const canSubmit = useMemo(() => {
+    const hasDates = form.startDate && form.endDate;
+    return isManagerView ? Boolean(form.employeeId && hasDates) : Boolean(hasDates);
+  }, [form, isManagerView]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,8 +56,18 @@ export function TimeOffManager({ employees, requests, loading, error, onCreate, 
       setSubmitting(true);
       setFormError(null);
       setListError(null);
-      await onCreate(form);
-      setForm(INITIAL_FORM);
+      const payload = isManagerView
+        ? form
+        : {
+            startDate: form.startDate,
+            endDate: form.endDate,
+            reason: form.reason
+          };
+      await onCreate(payload);
+      setForm((prev) => ({
+        ...INITIAL_FORM,
+        employeeId: isManagerView ? '' : prev.employeeId
+      }));
     } catch (err) {
       setFormError(err instanceof Error ? err.message : 'Unable to create request.');
     } finally {
@@ -54,17 +86,24 @@ export function TimeOffManager({ employees, requests, loading, error, onCreate, 
 
       <form className="timeoff-manager__form" onSubmit={handleSubmit}>
         <div className="timeoff-manager__grid">
-          <label className="timeoff-manager__field">
-            <span>Team Member</span>
-            <select name="employeeId" value={form.employeeId} onChange={handleChange} required>
-              <option value="">Select person…</option>
-              {employees.map((employee) => (
-                <option key={employee.id} value={employee.id}>
-                  {employee.name} · {employee.role}
-                </option>
-              ))}
-            </select>
-          </label>
+          {isManagerView ? (
+            <label className="timeoff-manager__field">
+              <span>Team Member</span>
+              <select name="employeeId" value={form.employeeId} onChange={handleChange} required>
+                <option value="">Select person…</option>
+                {employees.map((employee) => (
+                  <option key={employee.id} value={employee.id}>
+                    {employee.name} · {employee.role}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : (
+            <label className="timeoff-manager__field">
+              <span>Team Member</span>
+              <input type="text" value={currentUser?.name || currentUser?.email || 'You'} disabled />
+            </label>
+          )}
 
           <label className="timeoff-manager__field">
             <span>Start Date</span>
@@ -109,36 +148,59 @@ export function TimeOffManager({ employees, requests, loading, error, onCreate, 
                     {request.reason ? <p className="timeoff-manager__reason">{request.reason}</p> : null}
                   </div>
                   <div className="timeoff-manager__actions">
-                    <select
-                      value={request.status}
-                      onChange={async (event) => {
-                        try {
-                          setListError(null);
-                          await onUpdateStatus(request.id, event.target.value);
-                        } catch (err) {
-                          setListError(err instanceof Error ? err.message : 'Unable to update status.');
-                        }
-                      }}
-                    >
-                      {STATUS_OPTIONS.map((status) => (
-                        <option key={status} value={status}>
-                          {status}
-                        </option>
-                      ))}
-                    </select>
-                    <button
-                      type="button"
-                      onClick={async () => {
-                        try {
-                          setListError(null);
-                          await onDelete(request.id);
-                        } catch (err) {
-                          setListError(err instanceof Error ? err.message : 'Unable to delete request.');
-                        }
-                      }}
-                    >
-                      Remove
-                    </button>
+                    {isManagerView ? (
+                      <>
+                        <select
+                          value={request.status}
+                          onChange={async (event) => {
+                            try {
+                              setListError(null);
+                              await onUpdateStatus(request.id, event.target.value);
+                            } catch (err) {
+                              setListError(err instanceof Error ? err.message : 'Unable to update status.');
+                            }
+                          }}
+                        >
+                          {STATUS_OPTIONS.map((status) => (
+                            <option key={status} value={status}>
+                              {status}
+                            </option>
+                          ))}
+                        </select>
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            try {
+                              setListError(null);
+                              await onDelete(request.id);
+                            } catch (err) {
+                              setListError(err instanceof Error ? err.message : 'Unable to delete request.');
+                            }
+                          }}
+                        >
+                          Remove
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <span className={`timeoff-manager__status timeoff-manager__status--${request.status}`}>
+                          {request.status}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            try {
+                              setListError(null);
+                              await onDelete(request.id);
+                            } catch (err) {
+                              setListError(err instanceof Error ? err.message : 'Unable to cancel request.');
+                            }
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    )}
                   </div>
                 </li>
               );
@@ -174,5 +236,11 @@ TimeOffManager.propTypes = {
   error: PropTypes.shape({ message: PropTypes.string }),
   onCreate: PropTypes.func.isRequired,
   onUpdateStatus: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
+  mode: PropTypes.oneOf(['manager', 'employee']),
+  currentUser: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    email: PropTypes.string
+  })
 };

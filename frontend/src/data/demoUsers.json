@@ -1,0 +1,27 @@
+[
+  {
+    "label": "Log in as Jordan (Manager)",
+    "email": "jordan.miles@example.com",
+    "password": "jorda-44fcf1"
+  },
+  {
+    "label": "Log in as Priya (Employee)",
+    "email": "priya.patel@example.com",
+    "password": "priya-66c716"
+  },
+  {
+    "label": "Log in as Andres (Employee)",
+    "email": "andres.castillo@example.com",
+    "password": "andre-33b32b"
+  },
+  {
+    "label": "Log in as Sasha (Employee)",
+    "email": "sasha.green@example.com",
+    "password": "sasha-a52d7e"
+  },
+  {
+    "label": "Log in as Marcus (Employee)",
+    "email": "marcus.lee@example.com",
+    "password": "marcu-bbb800"
+  }
+]

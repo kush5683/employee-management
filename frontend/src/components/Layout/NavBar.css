@@ -1,20 +1,167 @@
 .navbar {
-    display: flex;
-    gap: 20px;
-    padding: 16px 24px;
-    background: white;
-    border-bottom: 1px solid #eee;
+  width: 100%;
+  margin: 1.25rem 0 0;
+  padding: 0.85rem clamp(1rem, 3vw, 3rem);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--color-surface), var(--color-surface-alt));
+  box-shadow: var(--shadow-layered);
+  border: 1px solid rgba(31, 35, 40, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.nav-links {
+  position: relative;
+  overflow: visible;
+  flex: 1;
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.navbar__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 999px;
+  background: var(--color-selection);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 12px 30px rgba(37, 99, 235, 0.25);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    width 0.3s ease,
+    height 0.3s ease,
+    opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+:root[data-theme="dark"] .navbar__indicator {
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 30px rgba(14, 165, 233, 0.35);
+}
+
+:root[data-theme="gruvbox"] .navbar__indicator {
+  background: linear-gradient(135deg, #fabd2f, #fe8019);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 12px 30px rgba(250, 189, 47, 0.35);
+}
+
+.nav-item {
+  position: relative;
+  padding: 0.7rem 1.3rem;
+  min-height: 2.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border-radius: 999px;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.nav-item:hover {
+  color: var(--color-text-secondary);
+}
+
+.nav-item.active {
+  color: var(--color-accent-strong);
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.nav-user__meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.nav-user__name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.nav-role {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.2rem;
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(148, 163, 184, 0.22);
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="dark"] .nav-role {
+  background: rgba(148, 163, 184, 0.25);
+  color: #e2e8f0;
+}
+
+:root[data-theme="gruvbox"] .nav-role {
+  background: rgba(250, 189, 47, 0.25);
+  color: #facc15;
+}
+
+.nav-role--manager {
+  background: rgba(37, 99, 235, 0.2);
+  color: var(--color-accent-strong);
+}
+
+.nav-role--employee {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.nav-logout {
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent-strong);
+  background: rgba(219, 234, 254, 0.9);
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.2);
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+:root[data-theme="dark"] .nav-logout {
+  background: rgba(59, 130, 246, 0.2);
+  color: #e0f2fe;
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.35);
+}
+
+:root[data-theme="gruvbox"] .nav-logout {
+  background: rgba(250, 189, 47, 0.2);
+  color: #facc15;
+  box-shadow: inset 0 0 0 1px rgba(250, 189, 47, 0.35);
+}
+
+.nav-logout:hover {
+  background: rgba(191, 219, 254, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.35);
+}
+
+:root[data-theme="dark"] .nav-logout:hover {
+  background: rgba(59, 130, 246, 0.35);
+}
+
+:root[data-theme="gruvbox"] .nav-logout:hover {
+  background: rgba(250, 189, 47, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__indicator {
+    transition: none;
   }
-  
-  .nav-item {
-    font-size: 16px;
-    color: #666;
-    text-decoration: none;
-    padding-bottom: 4px;
-  }
-  
-  .nav-item.active {
-    color: #000;
-    font-weight: bold;
-    border-bottom: 2px solid #6c5ce7;
-  }
+}
