@@ -2,6 +2,12 @@ import { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import './TimeOffManager.css';
 
+const formatDate = (value) => {
+  if (!value) return '';
+  const date = new Date(`${value}T00:00:00Z`);
+  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+};
+
 const STATUS_OPTIONS = ['pending', 'approved', 'rejected', 'cancelled'];
 
 const INITIAL_FORM = {
@@ -143,7 +149,7 @@ export function TimeOffManager({
                   <div>
                     <h3>{employee ? employee.name : request.employeeId}</h3>
                     <p>
-                      {new Date(request.startDate).toLocaleDateString()} → {new Date(request.endDate).toLocaleDateString()}
+                      {formatDate(request.startDate)} → {formatDate(request.endDate)}
                     </p>
                     {request.reason ? <p className="timeoff-manager__reason">{request.reason}</p> : null}
                   </div>
