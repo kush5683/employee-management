@@ -7,11 +7,11 @@ const employees = [
 ];
 
 const credentials = [
-  { employeeId: "EMP001", passwordHash: "$2a$10$EoWzXlzr16nbe9ySg88OEOmxfT1UY8ailqXFz3vGN9ofuUBev5nYe", role: "manager" },
-  { employeeId: "EMP002", passwordHash: "$2a$10$M8eAaHp1oD7f3.7XJoH9MuGxYZcQJUO2cSAB1ytY1/6KXOvNhbbXG", role: "employee" },
-  { employeeId: "EMP003", passwordHash: "$2a$10$pbkXx2oylZMhUlCT3VkOqObkkpFmSPrbr30YIOCwVDDDeWGPAHDVO", role: "employee" },
-  { employeeId: "EMP004", passwordHash: "$2a$10$4Ha4qzM7gc3KJ2YMBX1A9uLJfnLyC3xaQa58aeGeq/QAdzTZziEtq", role: "employee" },
-  { employeeId: "EMP005", passwordHash: "$2a$10$SB7GuiRl6VwBEm90LkAMPuzs4Zz2oxEd4pqco3ptAOEjun9wioMxG", role: "employee" }
+  { employeeId: "EMP001", passwordHash: "$2a$10$WV.wYT38gcb5NAgwY6fjgeAmK.IiivvBQKgWxCyqoPOOCIH/oXque", role: "manager" },
+  { employeeId: "EMP002", passwordHash: "$2a$10$lAzi.k8dm7srWizdcUqZG.MAAH8oiQPx8UC.JZItQFfqRZxb1uGVm", role: "employee" },
+  { employeeId: "EMP003", passwordHash: "$2a$10$.MEm6d5t.R3JGs6Ea02KyeOx8iCC5pk34YVXopzDY56NUyyZ.Y2mq", role: "employee" },
+  { employeeId: "EMP004", passwordHash: "$2a$10$9qgbylZAUqGrXHrrlgyVQO/EPYXL5Y5u0j51ZmGtLFmPURE3MvblC", role: "employee" },
+  { employeeId: "EMP005", passwordHash: "$2a$10$5iaJFwHXP5Sa60z1D70.uua9PMML/rD4Oj1TmgCEHApgNaG692NvO", role: "employee" }
 ];
 
 const shifts = [
