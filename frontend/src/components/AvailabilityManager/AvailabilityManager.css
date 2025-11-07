@@ -1,11 +1,11 @@
 /* AvailabilityManager.css — glass card + table + inputs */
 
 .avail-card {
-  background: rgba(255,255,255,.78);
-  backdrop-filter: blur(8px);
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 8px 24px rgba(20,20,40,.08);
+  background: linear-gradient(180deg, var(--color-surface), var(--color-surface-alt));
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: var(--shadow-layered);
+  border: 1px solid rgba(31, 35, 40, 0.08);
 }
 
 .avail-head {
@@ -24,7 +24,7 @@
 
 .avail-head .muted {
   margin: 2px 0 0 0;
-  color: #66708a;
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
@@ -41,28 +41,29 @@
 .avail-table thead th {
   text-align: left;
   font-weight: 600;
-  color: #2c325b;
-  border-bottom: 1px solid rgba(0,0,0,.06);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid rgba(31,35,40,.08);
   padding: 10px 8px;
 }
 
 .avail-table tbody td {
-  border-bottom: 1px solid rgba(0,0,0,.06);
+  border-bottom: 1px solid rgba(31,35,40,.08);
   padding: 10px 8px;
 }
 
 .avail-input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid rgba(0,0,0,.12);
+  border: 1px solid rgba(31, 35, 40, 0.15);
   border-radius: 12px;
   outline: none;
   background: #fff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .avail-input:focus {
-  border-color: #8aa2ff;
-  box-shadow: 0 0 0 3px rgba(138,162,255,.22);
+  border-color: rgba(31, 35, 40, 0.35);
+  box-shadow: 0 0 0 3px rgba(31, 35, 40, 0.08);
 }
 
 .avail-actions {
@@ -77,20 +78,20 @@
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  background: linear-gradient(135deg, #6787ff, #b97dff);
+  background: linear-gradient(135deg, var(--color-accent-strong), var(--color-accent));
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 8px 18px rgba(103,135,255,.25);
+  box-shadow: 0 12px 28px rgba(15, 16, 18, 0.2);
 }
 
-.btn:hover { filter: brightness(1.05); }
+.btn:hover { filter: brightness(1.02); }
 
 .btn.subtle {
-  background: #f3f4f8;
-  color: #334;
-  box-shadow: none;
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  box-shadow: inset 0 0 0 1px rgba(31, 35, 40, 0.08);
 }
 
 .error { color: #c0392b; margin: 8px 0; }
-.muted { color: #66708a; }
+.muted { color: var(--color-text-secondary); }
 .center { text-align: center; }

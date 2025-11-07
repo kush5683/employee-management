@@ -4,33 +4,32 @@
 .layout {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 2rem;
   min-height: 100vh;
-  width: 100%; /* Stretches across the viewport instead of maxing at 1180px */
-  margin: 0 auto;
-  padding: 2.75rem 1.75rem 3.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 2.75rem clamp(1rem, 3vw, 3rem) 3.5rem;
 }
 
-/* Gradient hero banner with glassmorphism accents */
+/* Neutral hero banner with layered shadows */
 .layout__header {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  padding: 2.75rem 3rem;
-  color: white;
-  background: linear-gradient(135deg, rgba(76, 110, 245, 0.95), rgba(56, 189, 248, 0.85));
-  box-shadow: var(--shadow-soft), var(--shadow-ring);
-  backdrop-filter: blur(18px) saturate(140%);
+  padding: 3rem;
+  color: var(--color-text-primary);
+  background: linear-gradient(180deg, var(--color-surface), var(--color-surface-alt));
+  box-shadow: var(--shadow-layered);
+  border: 1px solid rgba(31, 35, 40, 0.08);
 }
 
 .layout__header::after {
   content: '';
   position: absolute;
-  inset: -40% 40% auto -10%;
-  height: 150%;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.25) 0%, transparent 65%);
-  transform: rotate(18deg);
-  opacity: 0.7;
+  inset: 55% -15% -65% 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.75), transparent 65%);
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 /* Responsive two-column grid that collapses to a single column */
@@ -41,12 +40,11 @@
 }
 
 .layout__sidebar {
-  background: var(--color-surface);
+  background: linear-gradient(180deg, var(--color-surface), var(--color-surface-alt));
   border-radius: var(--radius-md);
   padding: 1.75rem;
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(20px) saturate(135%);
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(31, 35, 40, 0.08);
 }
 
 /* Stack main content rows with comfortable spacing */
@@ -70,10 +68,10 @@
 
 @media (max-width: 640px) {
   .layout {
-    padding: 1.75rem 1.15rem 2.5rem;
+    padding: 1.75rem 1rem 2.5rem;
   }
 
   .layout__header {
-    padding: 2rem 1.75rem;
+    padding: 2.25rem 1.75rem;
   }
 }

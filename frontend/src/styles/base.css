@@ -3,26 +3,34 @@
 /* -------------------------------------------------------------------------- */
 :root {
   color-scheme: light;
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  --color-bg: #eef3ff;
-  --color-bg-alt: #f9fbff;
-  --color-surface: rgba(255, 255, 255, 0.8);
-  --color-surface-strong: rgba(255, 255, 255, 0.95);
-  --color-surface-muted: rgba(255, 255, 255, 0.65);
-  --color-text-primary: #0f1d40;
-  --color-text-secondary: #526084;
-  --color-text-muted: #8591b5;
-  --color-accent: #4c6ef5;
-  --color-accent-strong: #364fc7;
-  --color-accent-warm: #f97316;
-  --shadow-xs: 0 12px 28px -18px rgba(15, 23, 42, 0.35);
-  --shadow-soft: 0 25px 55px -30px rgba(15, 23, 42, 0.45);
-  --shadow-medium: 0 35px 70px -30px rgba(76, 110, 245, 0.28);
-  --shadow-ring: 0 0 0 1px rgba(88, 110, 176, 0.18);
-  --radius-md: 16px;
-  --radius-lg: 26px;
+
+  --color-bg: #f5f6f8;
+  --color-bg-alt: #ebeef3;
+  --color-surface: #ffffff;
+  --color-surface-strong: #ffffff;
+  --color-surface-alt: #f8f9fb;
+  --color-surface-muted: #f1f2f6;
+
+  --color-text-primary: #1f2328;
+  --color-text-secondary: #535867;
+  --color-text-muted: #8d92a1;
+  --color-accent: #2563eb;
+  --color-accent-strong: #1e3a8a;
+  --color-accent-warm: #8a7354;
+  --color-selection: #dbeafe;
+
+  --shadow-xs: 0 6px 12px rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.08), 0 4px 10px rgba(15, 23, 42, 0.06);
+  --shadow-medium: 0 28px 60px rgba(15, 23, 42, 0.08), 0 18px 30px rgba(15, 23, 42, 0.05);
+  --shadow-layered: 0 45px 90px rgba(15, 23, 42, 0.08), 0 20px 40px rgba(15, 23, 42, 0.06), 0 2px 8px rgba(15, 23, 42, 0.12);
+  --shadow-ring: 0 0 0 1px rgba(15, 23, 42, 0.07);
+
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
   background-color: var(--color-bg);
   color: var(--color-text-primary);
 }
@@ -39,12 +47,13 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 15% 15%, rgba(76, 110, 245, 0.22) 0, transparent 55%),
-    radial-gradient(circle at 85% 10%, rgba(244, 114, 182, 0.2) 0, transparent 55%),
-    radial-gradient(circle at 85% 85%, rgba(79, 209, 197, 0.16) 0, transparent 52%),
-    linear-gradient(120deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.9), transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(214, 218, 230, 0.5), transparent 45%),
+    radial-gradient(circle at 90% 85%, rgba(210, 216, 224, 0.65), transparent 60%),
+    linear-gradient(135deg, var(--color-bg), var(--color-bg-alt));
   background-attachment: fixed;
   color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -60,4 +69,57 @@ button {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+/* Shared page wrappers keep content centered on wide screens */
+.page-wrap {
+  width: 100%;
+  margin: 0;
+  padding: 2rem clamp(1rem, 3vw, 3rem) 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Neutral hero block used on simple pages */
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  padding: 2.5rem 3rem;
+  background: linear-gradient(180deg, var(--color-surface), var(--color-surface-alt));
+  border: 1px solid rgba(31, 35, 40, 0.08);
+  box-shadow: var(--shadow-layered);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 40% -10% -60% 60%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.65), transparent 65%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 2.6vw + 1rem, 2.75rem);
+  line-height: 1.08;
+  color: var(--color-text-primary);
+}
+
+.hero p {
+  margin: 0.65rem 0 0;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+}
+
+@media (max-width: 640px) {
+  .page-wrap {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1.5rem;
+  }
 }
