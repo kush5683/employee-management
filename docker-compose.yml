@@ -17,10 +17,8 @@ services:
       context: .
       dockerfile: docker/backend/Dockerfile
     restart: unless-stopped
-    environment:
-      - PORT=4000
-      - MONGODB_URI=mongodb://mongo:27017/employeeManagement
-      - CLIENT_ORIGIN=http://localhost:4173
+    env_file:
+      - ./backend/.env.docker
     depends_on:
       - mongo
     ports:
