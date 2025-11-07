@@ -66,3 +66,17 @@
   font-size: 1.25rem;
   color: var(--color-accent);
 }
+
+.shift-page__notice {
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #92400e;
+}
+
+.shift-page__notice--error {
+  background: rgba(248, 113, 113, 0.15);
+  border-color: rgba(248, 113, 113, 0.4);
+  color: #991b1b;
+}

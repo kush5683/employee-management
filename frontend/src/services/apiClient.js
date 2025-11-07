@@ -47,6 +47,12 @@ export const apiClient = {
     });
     return payload;
   },
+  async changePassword(body) {
+    await request('/auth/change-password', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+  },
   async listTimeOff() {
     const payload = await request('/time-off');
     return payload?.data ?? [];

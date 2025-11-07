@@ -146,3 +146,26 @@
   text-align: center;
   color: var(--color-text-secondary);
 }
+
+.timeoff-manager__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  text-transform: capitalize;
+  font-weight: 600;
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--color-text-primary);
+}
+
+.timeoff-manager__status--approved {
+  background: rgba(34, 197, 94, 0.2);
+  color: #15803d;
+}
+
+.timeoff-manager__status--rejected,
+.timeoff-manager__status--cancelled {
+  background: rgba(248, 113, 113, 0.2);
+  color: #b91c1c;
+}

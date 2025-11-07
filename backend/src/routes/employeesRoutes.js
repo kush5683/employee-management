@@ -6,10 +6,11 @@ import {
   deleteEmployee,
 } from "../controllers/employeesController.js";
 import { requireAuth } from "../middleware/authMiddleware.js";
+import { requireManager } from "../middleware/permissions.js";
 
 const router = Router();
 
-router.use(requireAuth);
+router.use(requireAuth, requireManager);
 
 router.get("/", listEmployees);
 router.post("/", createEmployee);
