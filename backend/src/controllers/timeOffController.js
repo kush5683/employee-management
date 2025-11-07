@@ -7,7 +7,7 @@ const COLLECTION = 'time_off_requests';
 export const listTimeOffRequests = async (req, res) => {
   // Shared list endpoint that automatically scopes data based on the JWT.
   const db = getDb();
-  const accessibleIds = getAccessibleEmployeeIds(req.user);
+  const accessibleIds = getAccessibleEmployeeIds(req.user).map((id) => id.toString());
   let query = { employeeId: '__none__' };
 
   if (accessibleIds.length) {
@@ -20,7 +20,10 @@ export const listTimeOffRequests = async (req, res) => {
   }
 
   const items = await db.collection(COLLECTION).find(query).sort({ startDate: -1, createdAt: -1 }).toArray();
-  res.json({ data: items.map(normalise) });
+  const filtered = items
+    .map(normalise)
+    .filter((doc) => doc && (!accessibleIds.length || accessibleIds.includes(doc.employeeId)));
+  res.json({ data: filtered });
 };
 
 export const createTimeOffRequest = async (req, res, next) => {
@@ -122,8 +125,12 @@ function normalise(doc) {
   if (!doc) {
     return null;
   }
-  const { _id, ...rest } = doc;
-  return { id: _id.toString(), ...rest };
+  const { _id, employeeId, ...rest } = doc;
+  return {
+    id: _id.toString(),
+    employeeId: employeeId ? employeeId.toString() : undefined,
+    ...rest
+  };
 }
 
 function isEmployeeAccessible(employeeId, accessibleIds) {

@@ -26,7 +26,8 @@ export function useTimeOffRequests() {
   const createRequest = useCallback(
     async (payload) => {
       const created = await apiClient.createTimeOff(payload);
-      await fetchRequests();
+      setRequests((prev) => [created, ...prev]);
+      fetchRequests();
       return created;
     },
     [fetchRequests]
