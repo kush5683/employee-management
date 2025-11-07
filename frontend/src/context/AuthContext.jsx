@@ -10,23 +10,28 @@ import { apiClient, setAuthToken } from '../services/apiClient.js';
 const AuthContext = createContext(null);
 const STORAGE_KEY = 'ems-auth';
 
+function readPersistedSession() {
+  if (typeof window === 'undefined') {
+    return { user: null, token: null };
+  }
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return { user: null, token: null };
+    const parsed = JSON.parse(raw);
+    if (parsed.token) {
+      setAuthToken(parsed.token); // ensure API client has the token before other effects run
+    }
+    return {
+      user: parsed.user ?? null,
+      token: parsed.token ?? null
+    };
+  } catch {
+    return { user: null, token: null };
+  }
+}
+
 export function AuthProvider({ children }) {
-  const [authState, setAuthState] = useState(() => {
-    if (typeof window === 'undefined') {
-      return { user: null, token: null };
-    }
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (!raw) return { user: null, token: null };
-      const parsed = JSON.parse(raw);
-      return {
-        user: parsed.user ?? null,
-        token: parsed.token ?? null
-      };
-    } catch {
-      return { user: null, token: null };
-    }
-  });
+  const [authState, setAuthState] = useState(readPersistedSession);
 
   useEffect(() => {
     setAuthToken(authState.token);
