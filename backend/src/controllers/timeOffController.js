@@ -68,19 +68,20 @@ export const updateTimeOffStatus = async (req, res, next) => {
     }
 
     const accessibleIds = getAccessibleEmployeeIds(req.user);
-
     const db = getDb();
+    const existing = await db.collection(COLLECTION).findOne({ _id: new ObjectId(id) });
+
+    if (!existing || !isEmployeeAccessible(existing.employeeId, accessibleIds)) {
+      return res.status(404).json({ message: 'Request not found.' });
+    }
+
     const result = await db
       .collection(COLLECTION)
       .findOneAndUpdate(
-        { _id: new ObjectId(id), employeeId: { $in: accessibleIds } },
+        { _id: existing._id },
         { $set: { status, updatedAt: new Date() } },
         { returnDocument: 'after' }
       );
-
-    if (!result.value) {
-      return res.status(404).json({ message: 'Request not found.' });
-    }
 
     res.json({ data: normalise(result.value) });
   } catch (error) {
@@ -92,19 +93,14 @@ export const deleteTimeOffRequest = async (req, res, next) => {
   try {
     const { id } = req.params;
     const accessibleIds = getAccessibleEmployeeIds(req.user);
-
-    // Self-service delete allows employees to cancel their own requests while
-    // managers can delete any request inside their org tree.
     const db = getDb();
-    const outcome = await db.collection(COLLECTION).deleteOne({
-      _id: new ObjectId(id),
-      employeeId: { $in: accessibleIds }
-    });
+    const existing = await db.collection(COLLECTION).findOne({ _id: new ObjectId(id) });
 
-    if (!outcome.deletedCount) {
+    if (!existing || !isEmployeeAccessible(existing.employeeId, accessibleIds)) {
       return res.status(404).json({ message: 'Request not found.' });
     }
 
+    await db.collection(COLLECTION).deleteOne({ _id: existing._id });
     res.status(204).send();
   } catch (error) {
     next(error);
@@ -114,4 +110,10 @@ export const deleteTimeOffRequest = async (req, res, next) => {
 function normalise(doc) {
   const { _id, ...rest } = doc;
   return { id: _id.toString(), ...rest };
+}
+
+function isEmployeeAccessible(employeeId, accessibleIds) {
+  if (!employeeId) return false;
+  const value = typeof employeeId === 'string' ? employeeId : employeeId.toString();
+  return accessibleIds.includes(value);
 }
