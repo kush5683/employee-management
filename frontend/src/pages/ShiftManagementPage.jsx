@@ -110,7 +110,9 @@ export function ShiftManagementPage() {
 
   return (
     <Layout header={header} sidebar={sidebar}>
-      {employeesError ? (
+      {employeesLoading ? (
+        <div className="shift-page__notice">Loading employees…</div>
+      ) : employeesError ? (
         <div className="shift-page__notice shift-page__notice--error">
           Unable to load employees: {employeesError.message}
         </div>

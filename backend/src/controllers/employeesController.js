@@ -1,12 +1,21 @@
 import { getDb } from "../db/mongo.js";
 import { ObjectId } from "mongodb";
 import { hashPassword } from "../utils/password.js";
+import { getAccessibleEmployeeIds } from "../utils/accessControl.js";
 
 const employeesCol = () => getDb().collection("employees");
 
-export async function listEmployees(_req, res, next) {
+export async function listEmployees(req, res, next) {
   try {
-    const docs = await employeesCol().find({}).sort({ name: 1 }).toArray();
+    const accessible = getAccessibleEmployeeIds(req.user).filter((id) => ObjectId.isValid(id));
+    if (!accessible.length) {
+      return res.json({ data: [] });
+    }
+
+    const docs = await employeesCol()
+      .find({ _id: { $in: accessible.map((id) => new ObjectId(id)) } })
+      .sort({ name: 1 })
+      .toArray();
     res.json({ data: docs.map(serializeEmployee) });
   } catch (err) {
     next(err);

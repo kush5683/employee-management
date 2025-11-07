@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { apiClient, setAuthToken } from '../services/apiClient.js';
 
@@ -96,6 +97,10 @@ export function AuthProvider({ children }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 /**
  * Simple hook wrapper so components can consume authentication data safely.
