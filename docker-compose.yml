@@ -11,6 +11,8 @@ services:
       - ./docker/mongo-init:/docker-entrypoint-initdb.d:ro
     ports:
       - "27017:27017"
+    networks:
+      - app-net
 
   backend:
     build:
@@ -23,6 +25,8 @@ services:
       - mongo
     ports:
       - "4000:4000"
+    networks:
+      - app-net
 
   frontend:
     build:
@@ -38,6 +42,12 @@ services:
     volumes:
       - /etc/ssl/certs/origin-cert.pem:/etc/nginx/certs/origin-cert.pem:ro
       - /etc/ssl/private/private-key.pem:/etc/nginx/certs/private-key.pem:ro
+    networks:
+      - app-net
 
 volumes:
   mongo-data:
+
+networks:
+  app-net:
+    driver: bridge
