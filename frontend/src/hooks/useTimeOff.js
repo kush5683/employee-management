@@ -23,11 +23,14 @@ export function useTimeOffRequests() {
     fetchRequests();
   }, [fetchRequests]);
 
-  const createRequest = useCallback(async (payload) => {
-    const created = await apiClient.createTimeOff(payload);
-    setRequests((prev) => [created, ...prev]);
-    return created;
-  }, []);
+  const createRequest = useCallback(
+    async (payload) => {
+      const created = await apiClient.createTimeOff(payload);
+      await fetchRequests();
+      return created;
+    },
+    [fetchRequests]
+  );
 
   const updateStatus = useCallback(async (id, status) => {
     const updated = await apiClient.updateTimeOffStatus(id, status);
