@@ -120,7 +120,7 @@ Object.entries(idMap).forEach(([employeeCode, objectId]) => {
 
 const toEmployeeRef = (code) => {
   const ref = idMap[code];
-  return ref ? ref.valueOf() : code;
+  return ref ? ref.toString() : code;
 };
 
 if (shifts.length) {
