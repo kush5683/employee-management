@@ -1,10 +1,11 @@
 # Employee Shift Management System
 
 ## Authors
-- TODO: Add team member names here
+Kush Shah
+Stephen Wang
 
 ## Class Link
-- TODO: Insert CS5610 section link or course page
+(https://johnguerra.co/classes/webDevelopment_online_fall_2025/)
 
 ## Project Objective
 Deliver a scheduling workspace that supports CRUD operations for shift assignments and time-off requests with a React front end and Node + MongoDB API.
