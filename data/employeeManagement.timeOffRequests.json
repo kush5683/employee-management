@@ -1,0 +1,20 @@
+[{
+  "_id": {
+    "$oid": "690551bf6bf5a0f719dab2cf"
+  },
+  "employeeId": "EMP002",
+  "startDate": "2024-05-21",
+  "endDate": "2024-05-23",
+  "reason": "Family trip",
+  "status": "approved"
+},
+{
+  "_id": {
+    "$oid": "690551bf6bf5a0f719dab2d0"
+  },
+  "employeeId": "EMP003",
+  "startDate": "2024-05-28",
+  "endDate": "2024-05-30",
+  "reason": "Medical appointment",
+  "status": "pending"
+}]
