@@ -4,7 +4,12 @@ import './TimeOffManager.css';
 
 const formatDate = (value) => {
   if (!value) return '';
-  const date = new Date(`${value}T00:00:00Z`);
+  const [datePart] = value.split('T');
+  const [year, month, day] = datePart.split('-').map(Number);
+  if (!year || !month || !day) {
+    return datePart;
+  }
+  const date = new Date(year, month - 1, day);
   return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
 };
 

@@ -1,11 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import { apiClient } from '../services/apiClient.js';
 
+const toLocalDate = (value) => {
+  if (!value) return null;
+  const [datePart] = value.split('T');
+  const [year, month, day] = datePart.split('-').map(Number);
+  if (!year || !month || !day) {
+    return null;
+  }
+  return new Date(year, month - 1, day);
+};
+
 const parseDateValue = (value) => {
-  if (!value) return 0;
-  // Treat YYYY-MM-DD inputs as UTC midnight to avoid timezone shifts
-  const normalized = `${value}T00:00:00Z`;
-  return Date.parse(normalized) || 0;
+  const date = toLocalDate(value);
+  return date ? date.getTime() : 0;
 };
 
 const sortRequests = (items) =>
