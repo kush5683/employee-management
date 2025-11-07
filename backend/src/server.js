@@ -6,6 +6,7 @@ import timeOffRoutes from './routes/timeOffRoutes.js';
 import shiftsRoutes from './routes/shiftsRoutes.js';
 import employeesRoutes from './routes/employeesRoutes.js'; 
 import availabilitiesRoutes from "./routes/availabilitiesRoutes.js";
+import authRoutes from './routes/authRoutes.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 
 async function start() {
@@ -19,6 +20,7 @@ async function start() {
     res.json({ status: 'ok' });
   });
 
+  app.use('/auth', authRoutes);
   app.use('/time-off', timeOffRoutes);
   app.use('/shifts', shiftsRoutes);
   app.use('/employees', employeesRoutes); 

@@ -1,10 +1,26 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 const API_PREFIX = '';
 
+let authToken = null;
+
+export function setAuthToken(token) {
+  authToken = token || null;
+}
+
 async function request(path, options = {}) {
+  const { skipAuth, ...rest } = options;
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(rest.headers || {})
+  };
+
+  if (!skipAuth && authToken) {
+    headers.Authorization = `Bearer ${authToken}`;
+  }
+
   const response = await fetch(`${API_BASE_URL}${API_PREFIX}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
-    ...options
+    ...rest,
+    headers
   });
 
   if (!response.ok) {
@@ -23,6 +39,14 @@ async function request(path, options = {}) {
 }
 
 export const apiClient = {
+  async login(credentials) {
+    const payload = await request('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+      skipAuth: true
+    });
+    return payload;
+  },
   async listTimeOff() {
     const payload = await request('/time-off');
     return payload?.data ?? [];

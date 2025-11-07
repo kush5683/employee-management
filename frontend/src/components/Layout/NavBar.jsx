@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./NavBar.css";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const NAV_LINKS = [
   { to: "/employees", label: "Employees" },
@@ -9,6 +10,7 @@ const NAV_LINKS = [
 ];
 
 export default function NavBar() {
+  const { user, logout } = useAuth();
   const barRef = useRef(null);
   const location = useLocation();
   const [indicatorRect, setIndicatorRect] = useState(null);
@@ -53,17 +55,27 @@ export default function NavBar() {
     : { opacity: 0 };
 
   return (
-    <nav className="navbar" ref={barRef}>
-      <span className="navbar__indicator" style={indicatorStyle} />
-      {NAV_LINKS.map((link) => (
-        <NavLink
-          key={link.to}
-          to={link.to}
-          className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}
-        >
-          {link.label}
-        </NavLink>
-      ))}
+    <nav className="navbar">
+      <div className="nav-links" ref={barRef}>
+        <span className="navbar__indicator" style={indicatorStyle} />
+        {NAV_LINKS.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}
+          >
+            {link.label}
+          </NavLink>
+        ))}
+      </div>
+      {user ? (
+        <div className="nav-user">
+          <span>{user.name ?? user.email}</span>
+          <button type="button" className="nav-logout" onClick={logout}>
+            Log out
+          </button>
+        </div>
+      ) : null}
     </nav>
   );
 }

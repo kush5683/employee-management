@@ -6,8 +6,11 @@ import {
   deleteTimeOffRequest
 } from '../controllers/timeOffController.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
+import { requireAuth } from '../middleware/authMiddleware.js';
 
 const router = Router();
+
+router.use(requireAuth);
 
 router.get('/', asyncHandler(listTimeOffRequests));
 router.post('/', asyncHandler(createTimeOffRequest));
