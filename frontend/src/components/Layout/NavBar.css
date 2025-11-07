@@ -1,0 +1,20 @@
+.navbar {
+    display: flex;
+    gap: 20px;
+    padding: 16px 24px;
+    background: white;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .nav-item {
+    font-size: 16px;
+    color: #666;
+    text-decoration: none;
+    padding-bottom: 4px;
+  }
+  
+  .nav-item.active {
+    color: #000;
+    font-weight: bold;
+    border-bottom: 2px solid #6c5ce7;
+  }
