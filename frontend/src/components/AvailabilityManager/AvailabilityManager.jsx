@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import { AvailabilityAPI, EmployeesAPI } from "../../services/apiClient";
 import "./AvailabilityManager.css";
 
@@ -17,7 +18,7 @@ const DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
  *   POST   /api/availabilities                         (body: { employeeId, dayOfWeek, startTime, endTime })
  *   DELETE /api/availabilities/one                     (body: { employeeId, dayOfWeek })
  */
-export default function AvailabilityManager() {
+export default function AvailabilityManager({ onAvailabilityChange }) {
   const [employees, setEmployees] = useState([]);
   const [empId, setEmpId] = useState("");
   const [rows, setRows] = useState(DAYS.map((_,i)=>({ dayOfWeek:i, startTime:"", endTime:"" })));
@@ -82,6 +83,9 @@ export default function AvailabilityManager() {
       await Promise.all(ops);
       await loadAvail(empId);
       setErr("");
+      if (typeof onAvailabilityChange === "function") {
+        onAvailabilityChange();
+      }
     } catch {
       setErr("Save failed");
     } finally {
@@ -160,3 +164,7 @@ export default function AvailabilityManager() {
     </section>
   );
 }
+
+AvailabilityManager.propTypes = {
+  onAvailabilityChange: PropTypes.func
+};

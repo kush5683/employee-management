@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import { EmployeesAPI, AvailabilityAPI } from "../../services/apiClient";
 import "./TeamAvailabilityMatrix.css";
 

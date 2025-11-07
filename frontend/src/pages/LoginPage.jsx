@@ -2,19 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import './LoginPage.css';
-
-const DEMO_USERS = [
-  {
-    label: 'Log in as Jordan (Manager)',
-    email: 'jordan.miles@example.com',
-    password: 'jorda-44fcf1'
-  },
-  {
-    label: 'Log in as Priya (Employee)',
-    email: 'priya.patel@example.com',
-    password: 'priya-66c716'
-  }
-];
+import demoUsers from '../data/demoUsers.json';
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -98,7 +86,7 @@ export default function LoginPage() {
         <section className="login-demos" aria-label="Demo accounts">
           <p>Or jump straight into a demo profile:</p>
           <div className="login-demos__grid">
-            {DEMO_USERS.map((demo) => (
+            {demoUsers.map((demo) => (
               <button
                 type="button"
                 key={demo.email}

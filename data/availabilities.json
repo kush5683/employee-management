@@ -1,0 +1,30 @@
+[
+  { "employeeId": "EMP001", "dayOfWeek": 1, "startTime": "09:00", "endTime": "17:00" },
+  { "employeeId": "EMP001", "dayOfWeek": 2, "startTime": "09:00", "endTime": "17:00" },
+  { "employeeId": "EMP001", "dayOfWeek": 3, "startTime": "09:00", "endTime": "17:00" },
+  { "employeeId": "EMP001", "dayOfWeek": 4, "startTime": "09:00", "endTime": "17:00" },
+  { "employeeId": "EMP001", "dayOfWeek": 5, "startTime": "09:00", "endTime": "15:00" },
+
+  { "employeeId": "EMP002", "dayOfWeek": 1, "startTime": "06:00", "endTime": "14:00" },
+  { "employeeId": "EMP002", "dayOfWeek": 2, "startTime": "12:00", "endTime": "20:00" },
+  { "employeeId": "EMP002", "dayOfWeek": 4, "startTime": "08:00", "endTime": "16:00" },
+  { "employeeId": "EMP002", "dayOfWeek": 5, "startTime": "07:00", "endTime": "13:00" },
+  { "employeeId": "EMP002", "dayOfWeek": 6, "startTime": "09:00", "endTime": "13:00" },
+
+  { "employeeId": "EMP003", "dayOfWeek": 1, "startTime": "15:00", "endTime": "22:00" },
+  { "employeeId": "EMP003", "dayOfWeek": 2, "startTime": "15:00", "endTime": "22:00" },
+  { "employeeId": "EMP003", "dayOfWeek": 3, "startTime": "15:00", "endTime": "22:00" },
+  { "employeeId": "EMP003", "dayOfWeek": 5, "startTime": "12:00", "endTime": "18:00" },
+
+  { "employeeId": "EMP004", "dayOfWeek": 1, "startTime": "08:00", "endTime": "16:00" },
+  { "employeeId": "EMP004", "dayOfWeek": 2, "startTime": "08:00", "endTime": "16:00" },
+  { "employeeId": "EMP004", "dayOfWeek": 3, "startTime": "10:00", "endTime": "18:00" },
+  { "employeeId": "EMP004", "dayOfWeek": 4, "startTime": "08:00", "endTime": "16:00" },
+  { "employeeId": "EMP004", "dayOfWeek": 6, "startTime": "09:00", "endTime": "13:00" },
+
+  { "employeeId": "EMP005", "dayOfWeek": 2, "startTime": "06:00", "endTime": "14:00" },
+  { "employeeId": "EMP005", "dayOfWeek": 3, "startTime": "06:00", "endTime": "14:00" },
+  { "employeeId": "EMP005", "dayOfWeek": 4, "startTime": "10:00", "endTime": "18:00" },
+  { "employeeId": "EMP005", "dayOfWeek": 5, "startTime": "07:00", "endTime": "13:00" },
+  { "employeeId": "EMP005", "dayOfWeek": 6, "startTime": "08:00", "endTime": "14:00" }
+]
