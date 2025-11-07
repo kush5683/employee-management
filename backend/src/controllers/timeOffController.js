@@ -89,15 +89,18 @@ export const updateTimeOffStatus = async (req, res, next) => {
       return res.status(404).json({ message: 'Request not found.' });
     }
 
-    const result = await db
-      .collection(COLLECTION)
-      .findOneAndUpdate(
-        { _id: existing._id },
-        { $set: { status, updatedAt: new Date() } },
-        { returnDocument: 'after' }
-      );
+    await db.collection(COLLECTION).updateOne(
+      { _id: existing._id },
+      { $set: { status, updatedAt: new Date() } }
+    );
 
-    res.json({ data: normalise(result.value) });
+    const updated = await db.collection(COLLECTION).findOne({ _id: existing._id });
+
+    if (!updated) {
+      return res.status(404).json({ message: 'Request not found.' });
+    }
+
+    res.json({ data: normalise(updated) });
   } catch (error) {
     next(error);
   }
