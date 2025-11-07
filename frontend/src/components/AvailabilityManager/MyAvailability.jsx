@@ -21,7 +21,7 @@ function formatRange(start, end) {
 /**
  * Read-only single-employee availability summary used by non-manager accounts.
  */
-export default function MyAvailability({ employeeId }) {
+export default function MyAvailability({ employeeId, refreshKey = 0 }) {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -49,7 +49,7 @@ export default function MyAvailability({ employeeId }) {
     return () => {
       cancelled = true;
     };
-  }, [employeeId]);
+  }, [employeeId, refreshKey]);
 
   const dayLookup = useMemo(() => {
     const map = new Map();
@@ -105,5 +105,6 @@ export default function MyAvailability({ employeeId }) {
 }
 
 MyAvailability.propTypes = {
-  employeeId: PropTypes.string
+  employeeId: PropTypes.string,
+  refreshKey: PropTypes.number
 };

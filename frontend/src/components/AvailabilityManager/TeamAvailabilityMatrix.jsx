@@ -40,7 +40,7 @@ function indexWindows(rows) {
   return byEmp;
 }
 
-export default function TeamAvailabilityMatrix() {
+export default function TeamAvailabilityMatrix({ refreshKey = 0 }) {
   const [employees, setEmployees] = useState([]);
   const [matrix, setMatrix] = useState({});     // { [employeeId]: [dayIdx] => [{start,end}] }
   const [loading, setLoading] = useState(true);
@@ -78,7 +78,7 @@ export default function TeamAvailabilityMatrix() {
 
     load();
     return () => { cancelled = true; };
-  }, []);
+  }, [refreshKey]);
 
   const hasData = useMemo(
     () => employees.length > 0,
@@ -137,3 +137,7 @@ export default function TeamAvailabilityMatrix() {
     </section>
   );
 }
+
+TeamAvailabilityMatrix.propTypes = {
+  refreshKey: PropTypes.number
+};

@@ -32,12 +32,14 @@ export async function listByEmployee(req, res, next) {
 // If start/end are blank → delete that day (idempotent)
 export async function upsertOne(req, res, next) {
   try {
-    if (!isManager(req.user)) {
-      return res.status(403).json({ message: "Only managers may edit availability." });
+    const manager = isManager(req.user);
+    const { dayOfWeek, startTime, endTime } = req.body || {};
+    let employeeId = req.body?.employeeId;
+
+    if (!manager) {
+      employeeId = req.user?.sub;
     }
 
-    // We intentionally require the manager to pick the employee being updated.
-    const { employeeId, dayOfWeek, startTime, endTime } = req.body || {};
     if (!employeeId || dayOfWeek == null) {
       return res.status(400).json({ message: "employeeId and dayOfWeek required" });
     }
@@ -85,14 +87,14 @@ export async function upsertOne(req, res, next) {
 // DELETE /availabilities/one  (body OR query: { employeeId, dayOfWeek })
 export async function deleteOne(req, res, next) {
   try {
-    if (!isManager(req.user)) {
-      return res.status(403).json({ message: "Only managers may edit availability." });
-    }
-
-    // Delete uses either query/body params so we normalise before validating.
     const src = { ...(req.body || {}), ...(req.query || {}) };
-    const { employeeId } = src;
+    const manager = isManager(req.user);
+    let { employeeId } = src;
     const dayOfWeek = src.dayOfWeek != null ? Number(src.dayOfWeek) : null;
+
+    if (!manager) {
+      employeeId = req.user?.sub;
+    }
 
     if (!employeeId || dayOfWeek == null) {
       return res.status(400).json({ message: "employeeId and dayOfWeek required" });
