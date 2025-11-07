@@ -6,6 +6,8 @@ services:
     restart: unless-stopped
     environment:
       - MONGO_INITDB_DATABASE=employeeManagement
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=changeme
     volumes:
       - mongo-data:/data/db
       - ./docker/mongo-init:/docker-entrypoint-initdb.d:ro
