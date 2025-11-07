@@ -22,6 +22,9 @@ const DEFAULT_FORM = {
 
 export function EmployeesTable({ employees, loading, error, onCreate }) {
   // Track the form state locally; the rest of the table remains purely presentational.
+  const onDelete = arguments[0]?.onDelete;
+  const deletingId = arguments[0]?.deletingId;
+  const hasActions = typeof onDelete === "function";
   const [form, setForm] = useState(DEFAULT_FORM);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState(null);
@@ -161,6 +164,7 @@ export function EmployeesTable({ employees, loading, error, onCreate }) {
               <th>Location</th>
               <th>Hourly Rate</th>
               <th>Status</th>
+              {hasActions && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -184,6 +188,20 @@ export function EmployeesTable({ employees, loading, error, onCreate }) {
                       {employee.active ? 'Active' : 'Inactive'}
                     </span>
                   </td>
+                  {hasActions && (
+                    <td>
+                      <button
+                        type="button"
+                        className="employees__danger-btn"
+                        onClick={() => onDelete(employee)}
+                        disabled={deletingId === (employee.id || employee._id)}
+                        aria-label={`Remove ${employee.name || employee.email || "employee"}`}
+                        title="Remove employee"
+                      >
+                        {deletingId === (employee.id || employee._id) ? "Removing…" : "Remove"}
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))
             ) : (

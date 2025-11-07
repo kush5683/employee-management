@@ -230,3 +230,23 @@
     min-width: 620px;
   }
 }
+
+.employees__danger-btn {
+  appearance: none;
+  border: 1px solid #f1c0c0;
+  background: #ffe8e8;
+  color: #a40000;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.employees__danger-btn:hover:not(:disabled) {
+  background: #ffdada;
+  border-color: #e8a8a8;
+}
+.employees__danger-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+

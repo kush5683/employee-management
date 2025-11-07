@@ -1,0 +1,96 @@
+/* AvailabilityManager.css — glass card + table + inputs */
+
+.avail-card {
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(20,20,40,.08);
+}
+
+.avail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avail-head h2 {
+  margin: 0;
+  font-weight: 700;
+  color: #1f2544;
+}
+
+.avail-head .muted {
+  margin: 2px 0 0 0;
+  color: #66708a;
+  font-size: 14px;
+}
+
+.avail-select {
+  min-width: 260px;
+}
+
+.avail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+}
+
+.avail-table thead th {
+  text-align: left;
+  font-weight: 600;
+  color: #2c325b;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  padding: 10px 8px;
+}
+
+.avail-table tbody td {
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  padding: 10px 8px;
+}
+
+.avail-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 12px;
+  outline: none;
+  background: #fff;
+}
+
+.avail-input:focus {
+  border-color: #8aa2ff;
+  box-shadow: 0 0 0 3px rgba(138,162,255,.22);
+}
+
+.avail-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #6787ff, #b97dff);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8px 18px rgba(103,135,255,.25);
+}
+
+.btn:hover { filter: brightness(1.05); }
+
+.btn.subtle {
+  background: #f3f4f8;
+  color: #334;
+  box-shadow: none;
+}
+
+.error { color: #c0392b; margin: 8px 0; }
+.muted { color: #66708a; }
+.center { text-align: center; }

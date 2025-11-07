@@ -4,6 +4,8 @@ import { env } from './config/env.js';
 import { connectToDatabase } from './db/mongo.js';
 import timeOffRoutes from './routes/timeOffRoutes.js';
 import shiftsRoutes from './routes/shiftsRoutes.js';
+import employeesRoutes from './routes/employeesRoutes.js'; 
+import availabilitiesRoutes from "./routes/availabilitiesRoutes.js";
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 
 async function start() {
@@ -19,6 +21,8 @@ async function start() {
 
   app.use('/time-off', timeOffRoutes);
   app.use('/shifts', shiftsRoutes);
+  app.use('/employees', employeesRoutes); 
+  app.use("/availabilities", availabilitiesRoutes); 
 
   app.use(notFound);
   app.use(errorHandler);
