@@ -1,7 +1,7 @@
 # Employee Shift Management System
 
 ## Authors
-Kush Shah
+Kush Shah,
 Stephen Wang
 
 ## Class Link
