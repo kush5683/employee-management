@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-
+// I really like your UI and how everything is formatted and structured, and I really like how you have users in place to test different roles, good work!
 import NavBar from "./components/Layout/NavBar";
 import EmployeesPage from "./pages/EmployeesPage.jsx";
 import AvailabilitiesPage from "./pages/AvailabilitiesPage.jsx";
