@@ -3,7 +3,11 @@ import { getDb } from '../db/mongo.js';
 import { canAccessEmployee, getAccessibleEmployeeIds, isManager, forbidden } from '../utils/accessControl.js';
 
 const COLLECTION = 'shifts';
-
+/**
+* Good:
+* Server-side access control baked into shift CRUD: the shift controller scopes every read/write to getAccessibleEmployeeIds, 
+* so each request automatically enforces tenant isolation and rejects managers touching records they don’t own.
+*/
 export const listShifts = async (req, res) => {
   // Each user only receives shifts they are entitled to view. Managers see
   // themselves and managed employees, while individual contributors only see self.
