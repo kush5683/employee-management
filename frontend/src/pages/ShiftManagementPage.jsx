@@ -107,7 +107,10 @@ export function ShiftManagementPage() {
       </ul>
     </div>
   );
-
+/**
+* Employee-mode pages still render the entire shifts/time-off arrays, so a non-manager can see other people’s records. 
+* Could do: Filter those arrays by the logged-in user’s id before passing them to ShiftAssignments and TimeOffManager so only their own entries appear.
+*/
   return (
     <Layout header={header} sidebar={sidebar}>
       {employeesLoading ? (
