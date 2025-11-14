@@ -30,7 +30,12 @@ function readPersistedSession() {
     return { user: null, token: null };
   }
 }
-
+/**
+* Good:
+* Robust auth session management: AuthProvider lazily hydrates localStorage, keeps the API client’s token in sync, 
+* and memoizes derived flags like isManager/accessibleEmployeeIds, 
+* so downstream hooks/components always see consistent auth context even after refresh.
+*/
 export function AuthProvider({ children }) {
   const [authState, setAuthState] = useState(readPersistedSession);
 
