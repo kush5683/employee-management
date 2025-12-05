@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { AvailabilityAPI, EmployeesAPI } from "../../services/apiClient";
 import "./AvailabilityManager.css";
@@ -28,6 +28,22 @@ export default function AvailabilityManager({
   const [rows, setRows] = useState(DAYS.map((_, i) => ({ dayOfWeek: i, startTime: "", endTime: "" })));
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const feedbackTimer = useRef(null);
+
+  useEffect(() => () => {
+    if (feedbackTimer.current) {
+      clearTimeout(feedbackTimer.current);
+    }
+  }, []);
+
+  const showFeedback = (message) => {
+    setFeedback(message);
+    if (feedbackTimer.current) {
+      clearTimeout(feedbackTimer.current);
+    }
+    feedbackTimer.current = setTimeout(() => setFeedback(""), 3000);
+  };
 
   // Load people list only for managers; employees use the override data.
   useEffect(() => {
@@ -64,6 +80,7 @@ export default function AvailabilityManager({
         endTime:   map.get(i)?.endTime   || "",
       })));
       setErr("");
+      setFeedback("");
     } catch {
       setErr("Failed to fetch availability");
     } finally {
@@ -93,11 +110,13 @@ export default function AvailabilityManager({
       await Promise.all(ops);
       await loadAvail(empId);
       setErr("");
+      showFeedback("Availability saved.");
       if (typeof onAvailabilityChange === "function") {
         onAvailabilityChange();
       }
     } catch {
       setErr("Save failed");
+      setFeedback("");
     } finally {
       setLoading(false);
     }
@@ -128,6 +147,7 @@ export default function AvailabilityManager({
       </div>
 
       {err && <div className="error">{err}</div>}
+      {feedback && !err && <div className="success">{feedback}</div>}
       {loading && <div className="muted">Loading…</div>}
 
       <table className="avail-table">

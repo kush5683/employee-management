@@ -86,30 +86,24 @@ export function ShiftManagementPage() {
     </div>
   );
 
-  const sidebar = (
-    <div className="shift-page__sidebar">
-      <h3>Quick Overview</h3>
-      <ul>
-        <li>
-          <span>Total Shifts</span>
-          <strong>{stats.shifts}</strong>
-        </li>
-        <li>
-          <span>Upcoming / Active</span>
-          <strong>{stats.upcoming}</strong>
-        </li>
-        {isManager ? (
-          <li>
-            <span>Pending Time Off</span>
-            <strong>{stats.timeOffPending}</strong>
-          </li>
-        ) : null}
-      </ul>
-    </div>
-  );
-
   return (
-    <Layout header={header} sidebar={sidebar}>
+    <Layout header={header}>
+      <section className="shift-page__metrics" aria-label="Quick overview">
+        <article className="shift-page__metric">
+          <p>Total Shifts</p>
+          <strong>{stats.shifts}</strong>
+        </article>
+        <article className="shift-page__metric">
+          <p>Upcoming / Active</p>
+          <strong>{stats.upcoming}</strong>
+        </article>
+        {isManager ? (
+          <article className="shift-page__metric">
+            <p>Pending Time Off</p>
+            <strong>{stats.timeOffPending}</strong>
+          </article>
+        ) : null}
+      </section>
       {employeesLoading ? (
         <div className="shift-page__notice">Loading employees…</div>
       ) : employeesError ? (

@@ -58,6 +58,7 @@ export default function LoginPage() {
               type="email"
               name="email"
               autoComplete="email"
+              className="input"
               value={form.email}
               onChange={handleChange}
               required
@@ -70,6 +71,7 @@ export default function LoginPage() {
               type="password"
               name="password"
               autoComplete="current-password"
+              className="input"
               value={form.password}
               onChange={handleChange}
               required
@@ -78,7 +80,7 @@ export default function LoginPage() {
 
           {error ? <p className="login-error">{error}</p> : null}
 
-          <button type="submit" disabled={submitting}>
+          <button type="submit" className="button button--primary" disabled={submitting}>
             {submitting ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
@@ -90,7 +92,7 @@ export default function LoginPage() {
               <button
                 type="button"
                 key={demo.email}
-                className="login-demo-btn"
+                className="login-demo-btn button button--secondary"
                 onClick={() => handleDemoLogin(demo)}
                 disabled={submitting}
               >

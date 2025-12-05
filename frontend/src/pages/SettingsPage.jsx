@@ -61,6 +61,7 @@ export default function SettingsPage() {
             <input
               type="password"
               name="currentPassword"
+              className="input"
               value={passwordForm.currentPassword}
               onChange={handlePasswordChange}
               required
@@ -71,6 +72,7 @@ export default function SettingsPage() {
             <input
               type="password"
               name="newPassword"
+              className="input"
               value={passwordForm.newPassword}
               minLength={8}
               onChange={handlePasswordChange}
@@ -82,6 +84,7 @@ export default function SettingsPage() {
             <input
               type="password"
               name="confirmPassword"
+              className="input"
               value={passwordForm.confirmPassword}
               minLength={8}
               onChange={handlePasswordChange}
@@ -92,7 +95,7 @@ export default function SettingsPage() {
           {passwordError ? <p className="settings-error">{passwordError}</p> : null}
           {passwordSuccess ? <p className="settings-success">{passwordSuccess}</p> : null}
 
-          <button type="submit" disabled={passwordSubmitting}>
+          <button type="submit" className="button button--primary" disabled={passwordSubmitting}>
             {passwordSubmitting ? 'Updating…' : 'Update Password'}
           </button>
         </form>

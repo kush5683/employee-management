@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import './TimeOffManager.css';
 
@@ -46,6 +46,24 @@ export function TimeOffManager({
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState(null);
   const [listError, setListError] = useState(null);
+  const [feedback, setFeedback] = useState('');
+  const feedbackTimer = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (feedbackTimer.current) {
+        clearTimeout(feedbackTimer.current);
+      }
+    };
+  }, []);
+
+  const showFeedback = (message) => {
+    setFeedback(message);
+    if (feedbackTimer.current) {
+      clearTimeout(feedbackTimer.current);
+    }
+    feedbackTimer.current = setTimeout(() => setFeedback(''), 3000);
+  };
 
   const canSubmit = useMemo(() => {
     const hasDates = form.startDate && form.endDate;
@@ -79,6 +97,7 @@ export function TimeOffManager({
         ...INITIAL_FORM,
         employeeId: isManagerView ? '' : prev.employeeId
       }));
+      showFeedback('Request submitted.');
     } catch (err) {
       setFormError(err instanceof Error ? err.message : 'Unable to create request.');
     } finally {
@@ -100,7 +119,13 @@ export function TimeOffManager({
           {isManagerView ? (
             <label className="timeoff-manager__field">
               <span>Team Member</span>
-              <select name="employeeId" value={form.employeeId} onChange={handleChange} required>
+              <select
+                name="employeeId"
+                value={form.employeeId}
+                onChange={handleChange}
+                className="input"
+                required
+              >
                 <option value="">Select person…</option>
                 {employees.map((employee) => (
                   <option key={employee.id} value={employee.id}>
@@ -118,29 +143,51 @@ export function TimeOffManager({
 
           <label className="timeoff-manager__field">
             <span>Start Date</span>
-            <input name="startDate" type="date" value={form.startDate} onChange={handleChange} required />
+            <input
+              name="startDate"
+              type="date"
+              className="input"
+              value={form.startDate}
+              onChange={handleChange}
+              required
+            />
           </label>
 
           <label className="timeoff-manager__field">
             <span>End Date</span>
-            <input name="endDate" type="date" value={form.endDate} onChange={handleChange} required />
+            <input
+              name="endDate"
+              type="date"
+              className="input"
+              value={form.endDate}
+              onChange={handleChange}
+              required
+            />
           </label>
 
           <label className="timeoff-manager__field timeoff-manager__field--full">
             <span>Reason</span>
-            <input name="reason" type="text" value={form.reason} onChange={handleChange} placeholder="Optional notes" />
+            <input
+              name="reason"
+              type="text"
+              className="input"
+              value={form.reason}
+              onChange={handleChange}
+              placeholder="Optional notes"
+            />
           </label>
         </div>
 
         {formError ? <p className="timeoff-manager__error">{formError}</p> : null}
 
-        <button type="submit" disabled={!canSubmit || submitting}>
+        <button type="submit" className="button button--primary" disabled={!canSubmit || submitting}>
           {submitting ? 'Submitting…' : 'Submit Request'}
         </button>
       </form>
 
       {error ? <p className="timeoff-manager__error">{error.message}</p> : null}
       {listError ? <p className="timeoff-manager__error">{listError}</p> : null}
+      {feedback ? <p className="timeoff-manager__feedback">{feedback}</p> : null}
 
       <div className="timeoff-manager__list">
         {loading ? (
@@ -163,10 +210,12 @@ export function TimeOffManager({
                       <>
                         <select
                           value={request.status}
+                          className="input"
                           onChange={async (event) => {
                             try {
                               setListError(null);
                               await onUpdateStatus(request.id, event.target.value);
+                              showFeedback('Status updated.');
                             } catch (err) {
                               setListError(err instanceof Error ? err.message : 'Unable to update status.');
                             }
@@ -180,10 +229,12 @@ export function TimeOffManager({
                         </select>
                         <button
                           type="button"
+                          className="button button--secondary"
                           onClick={async () => {
                             try {
                               setListError(null);
                               await onDelete(request.id);
+                              showFeedback('Request removed.');
                             } catch (err) {
                               setListError(err instanceof Error ? err.message : 'Unable to delete request.');
                             }
@@ -199,10 +250,12 @@ export function TimeOffManager({
                         </span>
                         <button
                           type="button"
+                          className="button button--secondary"
                           onClick={async () => {
                             try {
                               setListError(null);
                               await onDelete(request.id);
+                              showFeedback('Request cancelled.');
                             } catch (err) {
                               setListError(err instanceof Error ? err.message : 'Unable to cancel request.');
                             }

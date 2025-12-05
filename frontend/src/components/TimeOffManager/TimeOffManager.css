@@ -64,20 +64,6 @@
 
 .timeoff-manager__form button {
   align-self: flex-start;
-  border-radius: 999px;
-  border: none;
-  padding: 0.75rem 1.45rem;
-  background: linear-gradient(135deg, var(--color-accent-strong), var(--color-accent));
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 18px 35px rgba(14, 14, 18, 0.25);
-}
-
-.timeoff-manager__form button:disabled {
-  background: rgba(148, 163, 184, 0.55);
-  box-shadow: none;
-  cursor: not-allowed;
 }
 
 .timeoff-manager__error {
@@ -127,19 +113,8 @@
   gap: 0.75rem;
 }
 
-.timeoff-manager__actions select {
-  border-radius: 999px;
-  padding: 0.35rem 0.75rem;
-  border: 1px solid rgba(31, 35, 40, 0.15);
-  background: #fff;
-}
-
 .timeoff-manager__actions button {
-  background: none;
-  border: none;
-  color: #b43434;
-  font-weight: 600;
-  cursor: pointer;
+  white-space: nowrap;
 }
 
 .timeoff-manager__empty {
@@ -169,6 +144,12 @@
 .timeoff-manager__status--cancelled {
   background: rgba(248, 113, 113, 0.2);
   color: #b91c1c;
+}
+
+.timeoff-manager__feedback {
+  margin: 0;
+  color: #15803d;
+  font-weight: 600;
 }
 
 @media (max-width: 720px) {

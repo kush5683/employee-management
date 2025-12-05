@@ -93,5 +93,6 @@
 }
 
 .error { color: #c0392b; margin: 8px 0; }
+.success { color: #15803d; margin: 8px 0; font-weight: 600; }
 .muted { color: var(--color-text-secondary); }
 .center { text-align: center; }

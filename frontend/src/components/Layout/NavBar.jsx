@@ -86,7 +86,7 @@ export default function NavBar() {
               {isManager ? 'Manager' : 'Employee'}
             </span>
           </div>
-          <button type="button" className="nav-logout" onClick={logout}>
+          <button type="button" className="nav-logout button button--secondary" onClick={logout}>
             Log out
           </button>
         </div>
