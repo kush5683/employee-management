@@ -139,7 +139,7 @@ button {
   position: relative;
   overflow: hidden;
   border-radius: 32px;
-  padding: 2.5rem 3rem;
+  padding: clamp(1.5rem, 2vw + 1rem, 2.25rem) clamp(1.75rem, 4vw, 2.75rem);
   background: linear-gradient(180deg, var(--color-surface), var(--color-surface-alt));
   border: 1px solid rgba(31, 35, 40, 0.08);
   box-shadow: var(--shadow-layered);

@@ -29,8 +29,9 @@
 
 .timeoff-manager__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
+  align-items: end;
 }
 
 .timeoff-manager__field {
@@ -58,7 +59,7 @@
 }
 
 .timeoff-manager__field--full {
-  grid-column: 1 / -1;
+  grid-column: span 2;
 }
 
 .timeoff-manager__form button {
@@ -168,4 +169,10 @@
 .timeoff-manager__status--cancelled {
   background: rgba(248, 113, 113, 0.2);
   color: #b91c1c;
+}
+
+@media (max-width: 720px) {
+  .timeoff-manager__field--full {
+    grid-column: 1 / -1;
+  }
 }

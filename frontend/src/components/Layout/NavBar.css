@@ -68,6 +68,19 @@
 
 .nav-item.active {
   color: var(--color-accent-strong);
+  font-weight: 700;
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 6px;
+  height: 3px;
+  background: linear-gradient(135deg, var(--color-accent-strong), var(--color-accent));
+  border-radius: 999px;
+  opacity: 0.8;
 }
 
 .nav-user {
