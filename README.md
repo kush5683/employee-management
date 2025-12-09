@@ -19,6 +19,13 @@ Deliver a scheduling workspace that supports CRUD operations for shift assignmen
 - MongoDB Atlas or local Mongo instance
 - Modern CSS modules for component styling
 
+## Design System
+```
+- The app uses a consistent color palette with a primary blue for key actions, a light neutral background with white cards for content, and red accents for error states. This creates a clear visual hierarchy between actions, content, and system feedback.
+- We use a single modern sans-serif font family across the interface, differentiating headings, body text, and labels through font size and weight rather than multiple typefaces. This keeps the dashboard clean, readable, and visually consistent.
+- The layout follows core design principles such as visual hierarchy, consistent spacing, and clear affordances. Page titles and section headings establish structure, cards group related content, and consistent button styles and error messages give users immediate feedback on their actions.
+```
+  
 ## Repository Structure
 ```
 frontend/  # React client, hooks-based UI, styles
