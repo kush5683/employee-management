@@ -11,7 +11,7 @@ function fmt(time) {
   let h, m;
   if (time.includes(":")) {
     [h, m] = time.split(":");
-  } else if (time.length >= 3) {
+  } else if (time.length >= 3) { // this logic is a bit hard to read, maybe consider standardizing time entry so you don't have to format and normalize different types of time entries
     h = time.slice(0, time.length - 2);
     m = time.slice(-2);
   }
@@ -46,7 +46,7 @@ export default function TeamAvailabilityMatrix({ refreshKey = 0 }) {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { // when i visited this page as a manager, the page crashed. i will attach a screenshot in the PR, but i suspect it is due to some sort of loop or heavy logic in this useEffect, as useEffects are costly operations. 
     let cancelled = false;
 
     async function load() {
@@ -67,7 +67,7 @@ export default function TeamAvailabilityMatrix({ refreshKey = 0 }) {
         );
 
         if (cancelled) return;
-        const flat = all.flat();
+        const flat = all.flat(); // similar to above, this logic is a bit hard to read. comments or some simplifications could improve readability. maybe more descriptive names than "all" and "flat" 
         setMatrix(indexWindows(flat));
       } catch (e) {
         if (!cancelled) setErr(e);
